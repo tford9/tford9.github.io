@@ -1,6 +1,6 @@
 ---
-layout: default
 title: Home
+layout: default
 cover: header1.png
 categories: landing, home
 ---
