@@ -148,12 +148,13 @@ a:hover {
 .post {
   line-height: 24px;
   max-width: 725px;
+  margin-left: 0.5em;
   clear: both;
 }
 
 .post h2 {
   margin-top: 1.25em;
-  margin-left: -0.5em;
+  /*margin-left: -0.5em;*/
   margin-bottom: 1.25em;
 }
 
@@ -174,7 +175,7 @@ a:hover {
 }
 
 .post p {
-  font-family: 'Source Sans Pro', Arial, sans-serif;
+  font-family: 'Source Serif Pro', Times, serif;
   font-size: 17px;
   margin-bottom: 1.45em;
   text-align: justify;
