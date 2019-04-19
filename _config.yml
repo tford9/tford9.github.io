@@ -8,7 +8,7 @@ collections:
   uploads:
     title: Uploads
     output: true
-name: TFBlog
-markdown: redcarpet
+name: Research Blog
+markdown: kramdown
 highlighter: rouge
 pygments: true
