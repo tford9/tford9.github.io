@@ -1,7 +1,7 @@
 ---
 new_page_extension: md
 auto_deploy: false
-admin_path: "/.forestry/"
+admin_path: ''
 webhook_url: https://app.forestry.io/git/github/hook
 sections: 
 upload_dir: uploads
