@@ -7,10 +7,8 @@ sections:
 - type: heading
   label: Pages
 - type: document
-  path: "."
+  path: ''
   label: Landing
-  match: "**/*"
-  read_only: false
 upload_dir: uploads
 public_path: "/uploads"
 front_matter_path: ''
