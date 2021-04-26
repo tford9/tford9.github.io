@@ -7,7 +7,6 @@ sections:
 - type: document
   path: src/content/pages/about.md
   label: Landing Page
-  match: "**/*"
 - type: directory
   path: src/content
   label: Content
@@ -22,6 +21,7 @@ front_matter_path: ''
 use_front_matter_path: false
 file_template: ":filename:"
 build:
+  preview_output_directory: dev/
   install_dependencies_command: npm install
   preview_docker_image: forestryio/node:12
   mount_path: "/srv"

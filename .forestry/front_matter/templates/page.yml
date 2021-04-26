@@ -71,3 +71,4 @@ fields:
   description: How frequently should this be crawled by search engines?
 pages:
 - src/content/pages/about.md
+- src/content/pages/about.md
