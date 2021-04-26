@@ -1,7 +1,29 @@
 ---
 layout: page
-title: "About"
+title: Trenton W. Ford
 permalink: "/about/"
----
+updated: 2021-04-26 04:00:00 +00:00
+draft: false
+author: ''
+subtitle: This is all about me.
+content-description: Landing Page of personal site.
+changeFrequency: monthly
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+---
+### Who I Am
+
+My name is Trenton Ford, and I am a Ph.D. student at the University of Notre Dame. My area of research includes network science, graph theory, algorithms, and a bit of machine learning. My research is usually application driven, and generally in the space of Organizational Knowledge Management(KM).
+
+### What to Expect
+
+Welcome. If you’ve moved past the main page then you may be interested in my blog or are deciding if you should be. In either case, I’ll give you a flavor of the type of content you can expect in my periodic posts. In order of predicted frequency, here are topics of what you might see.
+
+1. Network Science (theory, learning, applications)
+2. Algorithms
+3. Useful software and packages
+
+Although you’re reading this post now (whenever this is), I expect this list to update as my interests change. To that end, I’ll change the post date as necessary. I’d like this to be an interactive blog, so feel free to leave comments on posts or email me directly.
+
+Looking forward,
+
+\-Trenton
