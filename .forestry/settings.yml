@@ -4,6 +4,10 @@ auto_deploy: false
 admin_path: "/admin/"
 webhook_url: https://app.forestry.io/git/github/hook
 sections:
+- type: document
+  path: src/content/pages/about.md
+  label: Landing Page
+  match: "**/*"
 - type: directory
   path: src/content
   label: Content
