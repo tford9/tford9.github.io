@@ -1,59 +1,63 @@
-flex
-====
+# 🌻 Smix
+__A gulp-based starter for Static Site Generators, preconfigured for Eleventy and Forestry CMS.__
 
-Flex is a responsive, flexible, [Jekyll](http://jekyllrb.com) theme.
+## Framework
 
-The theme is based on the website [The Development](http://thedevelopment.co).
+* ♥ Eleventy 0.12.1 out of the box
+  * Date filters for a friendly version such as `10 March 2020`, and ISO8601 (also RFC822 compatible)
+  * `getUrl` shortcode similar to Jekyll's `post_url` and `link` liquid tags
+  * Custom rendering engine for HTML files - `Liquid v9`
+    * Adds support for missing filters such as `where` and improves performance
+* 🛋 Preconfigured for [Forestry CMS](https://forestry.io/) _and_ [Netlify](https://netlify.com/).
+  * For Forestry
+    * [![Import into Forestry](https://assets.forestry.io/import-to-forestryK.svg)](https://app.forestry.io/quick-start?repo=hirusi/smix-eleventy-starter&engine=other)
+    * In the general site settings click on `Deploy admin` option to host the CMS on your domain.
+    * Everything else is already set up for you :)
+  * For Netlify...
+    * Sign up, log in, add a `New site`.
+    * Out of the box staging builds include Forestry drafts whereas production builds do not.
+* 💁Indie publishing and reading experience
+  * microformats2 support for `h-card`, `h-entry`, and `h-feed` out of the box
+* 👩‍💻 Modern JavaScript
+  * Transpilation via Babel
+    * Support for `ES2015` JavaScript syntax
+    * Support for `ES2017` `async`/`await` syntax
+  * Module bundling via Browserify
+* 🎨 PostCSS
+  * Includes: imports, nesting, purge, minification, autoprefixer
+  * TailwindCSS, configured to strip out unused classes from production builds
+  * Easily build a dark mode using the included `dm` screen type: `dm:bg-gray-900`
+* 🔍 SEO and more
+  * Meta tags for social networks (Open Graph/Twitter)
+  * Sitemap with `changeFrequency`; `robots.txt` (please also see [issue #7](https://github.com/hirusi/smix-eleventy-starter/issues/7))
+  * An Atom feed with support for both `published` and `updated` dates on articles
+  * Support for `content-description` meta tag
+* 📖 A sane fonts setup
+  * The `font-sans` class is configured to use system-default fonts
+  * Include fonts locally for enhanced privacy of your visitors
+  * `typeset` for professional looking content
+* 💪 Minified assets on production
+* 📔 Prettier and editorconfig
+* 🔧 Modular gulp task files for easy configuration and modification
 
-View a demo website [here](http://the-development.github.io/flex/).
+## To-Do
 
-Installation
-===
-To use this theme, you would do so like any other Jekyll setup:
+* Reload automatically after our assets change (filed [issue here](https://github.com/11ty/eleventy/issues/1125), waiting for response/PR approval). Please reload manually for now.
+* Webmentions, incoming and outgoing, only from/to other IndieWeb sites
+* System default serif font class
+* Scheduled blog posts
+* Lazy-load images
+* Responsive images
 
-1. Install Jekyll: `gem install jekyll`
-2. Fork this repository to your machine
-3. `cd` to the forked directory and run `jekyll serve --watch`
-4. Celebrate and dance.
+## How to Use
 
-Contributions
-===
+### Local Development
 
-In general, there are no strict rules for contributing, only that your code is clean and well structured.
+* `nvm use`
+* `npm install`
+* `npm run dev`
+* Open `localhost:8080` on your browser
 
-For bugs:
-- To merge a fix, you can simply open a pull request.
-- To report one that is not yet fixed, open an issue.
+### Production
 
-Feature requests:
-- **Always** open an issue first before implementing and proposing a new feature. This is only so I can make sure the theme doesn't become bloated with too many features. This way, I can determine if an idea is something that makes sense for the theme's design.
-
-If in doubt, you can always ask me on Twitter: [@jeffxmn](https://twitter.com/jeffxmn)
-
-License
-===
-
-Flex is licensed under the MIT license:
-
-
-The MIT License (MIT)
-
-Copyright (c) 2013-2014 Jeff Martin
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+* `npm run prod`
