@@ -1,91 +1,101 @@
-module.exports = function(config) {
-	// *** Collection imports
-	const collections = require("./eleventy/collections");
+const { DateTime } = require("luxon");
+const fs = require("fs");
+const pluginRss = require("@11ty/eleventy-plugin-rss");
+const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const pluginNavigation = require("@11ty/eleventy-navigation");
+const markdownIt = require("markdown-it");
+const markdownItAnchor = require("markdown-it-anchor");
 
-	// *** Filter imports
-	const collectionFilters = require("./eleventy/filters/collections");
-	const urlFilters = require("./eleventy/filters/urls");
-	const dateFilters = require("./eleventy/filters/dates");
+module.exports = function(eleventyConfig) {
+  eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addPlugin(pluginSyntaxHighlight);
+  eleventyConfig.addPlugin(pluginNavigation);
 
-	// *** Shortcode imports
-	const shortcodes = require("./eleventy/shortcodes");
+  eleventyConfig.setDataDeepMerge(true);
 
-	// *** Misc imports
-	const env = require("./eleventy/env");
+  eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
 
-	// *** Misc Options
-	// Additional files to watch for changes
-	config.addWatchTarget("./eleventy/");
+  eleventyConfig.addFilter("readableDate", dateObj => {
+    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
+  });
 
-	// *** Forestry CMS Config
-	// Run serve on 0.0.0.0 on staging
-	if (env.is11tyStaging)
-		config.setBrowserSyncConfig({
-			host: "0.0.0.0"
-		});
+  // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
+  eleventyConfig.addFilter('htmlDateString', (dateObj) => {
+    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
+  });
 
-	// Copy as-is from root to output path
-	// We can avoid this on development env
-	if (env.is11tyStaging || env.is11tyProduction)
-		config.addPassthroughCopy("admin");
+  // Get the first `n` elements of a collection.
+  eleventyConfig.addFilter("head", (array, n) => {
+    if( n < 0 ) {
+      return array.slice(n);
+    }
 
-	// *** Plugins
-	config.addPlugin(require("@11ty/eleventy-plugin-rss"));
-	// Typeset
-	if (env.is11tyProduction || env.is11tyStaging)
-		config.addPlugin(require("eleventy-plugin-typeset")());
-	// Safe external links
-	config.addPlugin(require("@hirusi/eleventy-plugin-safe-external-links"), {
-		pattern: "https{0,1}://", // RegExp pattern for external links
-		noopener: true, // Whether to include noopener
-		noreferrer: true, // Whether to include noreferrer
-		files: [
-			// What output file extensions to work on
-			".html"
-		]
-	});
+    return array.slice(0, n);
+  });
 
-	// *** Shortcodes
-	// Jekyll replacement for post_url tag as an 11ty shortcode
-	config.addShortcode("getUrl", shortcodes.postUrl);
-	config.addShortcode("getOwnerInfo", shortcodes.getOwnerInfo);
-	config.addShortcode("isOldPost", shortcodes.isOldPost);
+  eleventyConfig.addCollection("tagList", require("./_11ty/getTagList"));
 
-	// *** Filters
-	// Dates
-	config.addFilter("friendlyDate", dateFilters.friendlyDate);
-	config.addFilter("dateInISO8601", dateFilters.dateInISO8601);
-	// Filter posts per tag
-	config.addFilter("byTag", collectionFilters.byTag);
-	// Absolute url
-	config.addFilter("absoluteUrl", urlFilters.absoluteUrl);
-	// Parse the date using our own date filters to account for any article updates; overriding 11ty's RSS plugin
-	config.addNunjucksFilter("rssLastUpdatedDate", dateFilters.lastUpdatedDate);
-	// config.addFilter("htmlToAbsoluteUrls", feedFilters.htmlToAbsoluteUrls);
+  eleventyConfig.addPassthroughCopy("img");
+  eleventyConfig.addPassthroughCopy("files");
+  eleventyConfig.addPassthroughCopy("css");
 
-	// *** Collections
-	// Articles
-	config.addCollection("articles", collections.articles);
+  /* Markdown Overrides */
+  let markdownLibrary = markdownIt({
+    html: true,
+    breaks: true,
+    linkify: true
+  }).use(markdownItAnchor, {
+    permalink: true,
+    permalinkClass: "direct-link",
+    permalinkSymbol: "#"
+  });
+  eleventyConfig.setLibrary("md", markdownLibrary);
 
-	// *** Custom rendering engine
-	const { Liquid } = require("liquidjs");
-	const liquidJsOptions = {
-		extname: ".liquid",
-		dynamicPartials: false,
-		strict_filters: true,
-		root: ["src/includes", "src/layouts"]
-	};
-	const liquidEngine = new Liquid(liquidJsOptions);
-	config.setLibrary("liquid", liquidEngine);
+  // Browsersync Overrides
+  eleventyConfig.setBrowserSyncConfig({
+    callbacks: {
+      ready: function(err, browserSync) {
+        const content_404 = fs.readFileSync('_site/404.html');
 
-	return {
-		pathPrefix: "/", // useful for GitHub pages
-		dir: {
-			input: "./",
-			output: "dist",
-			includes: "src/includes",
-			layouts: "src/layouts",
-			data: "src/data"
-		}
-	};
+        browserSync.addMiddleware("*", (req, res) => {
+          // Provides the 404 content without redirect.
+          res.write(content_404);
+          res.end();
+        });
+      },
+    },
+    ui: false,
+    ghostMode: false
+  });
+
+  return {
+    templateFormats: [
+      "md",
+      "njk",
+      "html",
+      "liquid"
+    ],
+
+    // If your site lives in a different subdirectory, change this.
+    // Leading or trailing slashes are all normalized away, so don’t worry about those.
+
+    // If you don’t have a subdirectory, use "" or "/" (they do the same thing)
+    // This is only used for link URLs (it does not affect your file structure)
+    // Best paired with the `url` filter: https://www.11ty.io/docs/filters/url/
+
+    // You can also pass this in on the command line using `--pathprefix`
+    // pathPrefix: "/",
+
+    markdownTemplateEngine: "liquid",
+    htmlTemplateEngine: "njk",
+    dataTemplateEngine: "njk",
+
+    // These are all optional, defaults are shown:
+    dir: {
+      input: ".",
+      includes: "_includes",
+      data: "_data",
+      output: "_site"
+    }
+  };
 };

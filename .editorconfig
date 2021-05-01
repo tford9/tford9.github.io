@@ -1,24 +1,9 @@
-# Unix-style newlines with a newline ending every file
+root = true
+
 [*]
+indent_style = space
+indent_size = 2
 end_of_line = lf
 insert_final_newline = true
-# Set default charset
+trim_trailing_whitespace = true
 charset = utf-8
-
-# 4 space indentation
-[*.{html,js}]
-indent_style = tab
-indent_size = 4
-
-[*.{yml,yaml,css}]
-indent_style = space
-indent_size = 2
-
-# Matches the exact files either package.json or .travis.yml
-[{package.json,.travis.yml}]
-indent_style = tab
-indent_size = 2
-
-[*.md]
-indent_style = space
-indent_size = 2
