@@ -1,15 +1,14 @@
 {
-  "title": "John Doe",
-  "url": "https://myurl.com/",
-  "description": "Photographer and Web Designer",
+  "title": "Trenton W. Ford",
+  "url": "https://TrentonFord.com/",
+  "description": "Ph.D. Candidate @ University of Notre Dame",
   "feed": {
-    "subtitle": "I am writing about my experiences as a naval navel-gazer.",
+    "subtitle": "Writing about research; network science, social networks, memes and misinformation.",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
-    "id": "https://myurl.com/"
+    "id": "https://trentonford.com/"
   },
   "author": {
-    "name": "Your Name Here",
-    "email": "youremailaddress@example.com"
+    "name": "Trenton W. Ford"
   }
 }
