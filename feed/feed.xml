@@ -3,7 +3,7 @@
 	<title>Trenton W. Ford</title>
 	<subtitle>Writing about research; network science, social networks, memes and misinformation.</subtitle>
 	
-	<link href="https://trentonford.com/tford9.github.io/feed/feed.xml" rel="self"/>
+	<link href="https://trentonford.com/feed/feed.xml" rel="self"/>
 	<link href="https://TrentonFord.com/"/>
 	<updated>2021-10-08T00:00:00Z</updated>
 	<id>https://trentonford.com/</id>
@@ -14,9 +14,9 @@
 	
 	<entry>
 		<title>WikiFaces 1.0.1</title>
-		<link href="https://trentonford.com/tford9.github.io/posts/wikifaces101/"/>
+		<link href="https://trentonford.com/posts/wikifaces101/"/>
 		<updated>2021-10-08T00:00:00Z</updated>
-		<id>https://trentonford.com/tford9.github.io/posts/wikifaces101/</id>
+		<id>https://trentonford.com/posts/wikifaces101/</id>
 		<content type="html">&lt;p&gt;Hey all, I made a thing. The WikiFaces Downloader package wikifaces · PyPI. It isn&#39;t exactly an image dataset, but it is an image dataset generator.&lt;/p&gt;
 &lt;p&gt;The downloader takes in a category or page name and finds the corresponding wiki entry. It then uses that wiki entry to download images of &lt;em&gt;named&lt;/em&gt; people connected to that initial page by climbing through related categories - out to a user-specified distance. For instance, giving it the category &amp;quot;Facebook&amp;quot; would result in it downloading about 300 faces and putting them into a nice folder hierarchy perfect for training your facial recognition algorithms.&lt;/p&gt;
 &lt;p&gt;If you&#39;re interested in using or contributing to the package the links are down below.&lt;/p&gt;
