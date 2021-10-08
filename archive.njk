@@ -1,6 +1,6 @@
 ---
 layout: layouts/home.njk
-permalink: /posts/
+title: Archive
 eleventyNavigation:
   key: Archive
   order: 4
@@ -11,3 +11,12 @@ eleventyNavigation:
 
 {% set postslist = collections.posts %}
 {% include "postslist.njk" %}
+
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<title>{{ metadata.title }}</title>
+	{% set absoluteUrl %}{{ metadata.feed.path | url | absoluteUrl(metadata.url) }}{% endset %}
+	{%- for post in collections.posts %}
+	{% set absolutePostUrl %}{{ post.url | url | absoluteUrl(metadata.url) }}{% endset %}
+	{%- endfor %}
+</feed>
