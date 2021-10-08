@@ -10,7 +10,7 @@ eleventyNavigation:
 
 <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
   <div style="text-align:left">
-    <img src="../img/w3images/OIP.jpg" alt="Trenton W. Ford" class="w3-image" width="100"/>
+    <img src="/img/w3images/OIP.jpg" alt="Trenton W. Ford" class="w3-image" width="100"/>
 
 [comment]: <> (  <h1 class="w3-jumbo"><span class="w3-hide-small">I'm</span> {{ metadata.title }}.</h1>)
 
