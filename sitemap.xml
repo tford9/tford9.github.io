@@ -62,12 +62,7 @@
   </url>
   
   <url>
-    <loc>https://trentonford.com/tford9.github.io/page-list/</loc>
-    <lastmod>2021-10-08</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://trentonford.com/tford9.github.io/pages/about/</loc>
+    <loc>https://trentonford.com/tford9.github.io/about/</loc>
     <lastmod>2021-10-08</lastmod>
   </url>
   
@@ -77,17 +72,17 @@
   </url>
   
   <url>
-    <loc>https://trentonford.com/tford9.github.io/pages/contact/</loc>
+    <loc>https://trentonford.com/tford9.github.io/contact/</loc>
     <lastmod>2021-10-08</lastmod>
   </url>
   
   <url>
-    <loc>https://trentonford.com/tford9.github.io/pages/home/</loc>
+    <loc>https://trentonford.com/tford9.github.io/</loc>
     <lastmod>2021-10-08</lastmod>
   </url>
   
   <url>
-    <loc>https://trentonford.com/tford9.github.io/pages/photos/</loc>
+    <loc>https://trentonford.com/tford9.github.io/page-list/</loc>
     <lastmod>2021-10-08</lastmod>
   </url>
   
@@ -118,6 +113,11 @@
   
   <url>
     <loc>https://trentonford.com/tford9.github.io/tags/number-2/</loc>
+    <lastmod>2021-10-08</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://trentonford.com/tford9.github.io/viz/photos/</loc>
     <lastmod>2021-10-08</lastmod>
   </url>
 </urlset>
