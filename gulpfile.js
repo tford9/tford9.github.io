@@ -11,7 +11,7 @@ const
   // isProduction = (process.env.NODE_ENV === 'production'),
   // pkg = require('./package.json'),
   site = require('./site/_data/site.js'),
-  destPath = 'public',
+  destPath = '_site',
   theme = '_themes/' + (process.env.THEME || site.theme);
 
 

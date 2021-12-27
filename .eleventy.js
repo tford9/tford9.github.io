@@ -100,7 +100,7 @@ module.exports = (eleventyConfig) => {
       input: './site',
       includes: `${theme}/layouts`,
       data: '_data',
-      output: './public'
+      output: './_site'
     }
   }
 };
