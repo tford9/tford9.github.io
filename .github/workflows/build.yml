@@ -24,6 +24,7 @@ jobs:
       - name: Install dependencies & build
         run: |
           npm install
+          npm audit fix
           npm ci
           npm run build          
 
