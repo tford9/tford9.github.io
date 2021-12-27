@@ -1,5 +1,5 @@
 ---
-title: "WikiFaces Verion 1.0.6 Released"
+title: "WikiFaces Version 1.0.6 Released"
 date: 2021-12-16 12:30:00 +7
 tags: [packages, wikipedia, dataset]
 ---
