@@ -26,6 +26,7 @@ jobs:
           npm cache clean --force
           npm install
           npm audit fix
+          npm ci
           npm run build
 
       - name: Deploy
