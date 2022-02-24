@@ -4,7 +4,6 @@ date: 2022-1-26 12:30:00 +7
 tags: [news, packages]
 ---
 
-![Manipulated Image Example](https://miro.medium.com/max/854/1*Em6bD7JlI4vX-lzfCiUWOg.png)
 <div style="width:50px; height:50px">
     ![Manipulated Image Example](https://miro.medium.com/max/854/1*Em6bD7JlI4vX-lzfCiUWOg.png "Manipulated Image Example")
 </div>
