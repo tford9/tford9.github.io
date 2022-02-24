@@ -1,5 +1,7 @@
 {% extends "default.njk" %}
-
+---
+title: "Updates:"
+---
 {% block content %}
     <div class="posts">
       {% for post in collections.posts | reverse | limit(3) %}
