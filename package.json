@@ -47,6 +47,6 @@
   },
   "devDependencies": {
     "browser-sync": "^2.26.12",
-    "critical": "^3.0.0"
+    "critical": "^5.0.4"
   }
 }
