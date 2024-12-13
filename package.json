@@ -43,7 +43,7 @@
     "markdown-it-attrs": "^4.0.0",
     "markdown-it-emoji": "^2.0.0",
     "markdown-it-link-attributes": "^3.0.0",
-    "moment": "^2.29.0"
+    "moment": "^2.29.4"
   },
   "devDependencies": {
     "browser-sync": "^2.26.12",
