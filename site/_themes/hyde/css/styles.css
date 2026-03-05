@@ -1,18 +1,226 @@
-@import "fonts.css";
-
-@import "poole.css";
-@import "hyde.css";
-
 article {content-visibility: auto;}
 article img {height:auto;}
 
-/* Poole & Hyde default CSS does not pass today's lighthouse tests */
+/* === TERMINAL THEME === */
 
-a {color: #1a6091;}                             /* darken(#268bd2, 15%); */
-.post-date {color: #747474; font-size: 90%;}    /*  darken(#9a9a9a, 15%); */
-.related-posts li small {color: #747474;}
+a {color: #58a6ff;}
+.post-date {color: #8b949e; font-size: 90%;}
+.related-posts li small {color: #8b949e;}
 
 .sidebar-nav-item {line-height: 2.75;}
 @media (min-width: 48em) {
   .sidebar-nav-item {line-height: 1.75;}
+}
+
+/* Terminal-style nav items */
+.sidebar-nav-item::before {
+  content: "> ";
+  color: #3fb950;
+  font-family: "Courier New", Consolas, monospace;
+  font-weight: normal;
+}
+
+/* Terminal prompt before post titles */
+.post-title::before {
+  content: "$ ";
+  color: #3fb950;
+  font-family: "Courier New", Consolas, monospace;
+  font-weight: normal;
+  font-size: 0.8em;
+}
+
+/* Terminal window styled posts */
+.post {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+}
+.post::before {
+  content: "";
+  display: block;
+  height: 12px;
+  margin: -1.5rem -1.5rem 1rem -1.5rem;
+  background: #21262d;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 1px solid #30363d;
+  background-image: radial-gradient(circle at 20px 6px, #f85149 5px, transparent 5px),
+                    radial-gradient(circle at 38px 6px, #d29922 5px, transparent 5px),
+                    radial-gradient(circle at 56px 6px, #3fb950 5px, transparent 5px);
+}
+
+/* Page content terminal styling */
+.page {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+/* Scanline overlay on main content (subtle) */
+.content::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  z-index: 9999;
+}
+
+/* Tagline terminal style */
+.sidebar-about .lead {
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 0.85rem;
+  color: #8b949e;
+}
+.sidebar-about .lead::before {
+  content: "// ";
+  color: #484f58;
+}
+
+/* === LIGHT MODE === */
+
+body.light-mode {
+  color: #24292f;
+  background-color: #ffffff;
+}
+
+body.light-mode .sidebar {
+  background-color: #f6f8fa;
+  border-right-color: #d0d7de;
+  color: rgba(0,0,0,.5);
+}
+body.light-mode .sidebar a {
+  color: #24292f;
+}
+body.light-mode .sidebar-about h1,
+body.light-mode .sidebar-about h1 a,
+body.light-mode .sidebar-about h1::after {
+  color: #0969da;
+}
+body.light-mode .sidebar-nav-item::before {
+  color: #0969da;
+}
+body.light-mode .sidebar-about .lead {
+  color: #57606a;
+}
+body.light-mode .sidebar-about .lead::before {
+  color: #8c959f;
+}
+body.light-mode .sidebar p {
+  color: #57606a;
+}
+
+body.light-mode .theme-toggle {
+  border-color: rgba(0,0,0,.2);
+  color: rgba(0,0,0,.5);
+}
+body.light-mode .theme-toggle:hover {
+  border-color: rgba(0,0,0,.5);
+  color: #24292f;
+}
+
+body.light-mode h1, body.light-mode h2, body.light-mode h3,
+body.light-mode h4, body.light-mode h5, body.light-mode h6 {
+  color: #24292f;
+}
+body.light-mode strong {
+  color: #24292f;
+}
+body.light-mode a {
+  color: #0969da;
+}
+body.light-mode a:hover,
+body.light-mode a:focus {
+  color: #0550ae;
+}
+
+body.light-mode .post,
+body.light-mode .page {
+  background: #ffffff;
+  border-color: #d0d7de;
+}
+body.light-mode .post::before {
+  background: #f6f8fa;
+  border-bottom-color: #d0d7de;
+  background-image: radial-gradient(circle at 20px 6px, #ff6058 5px, transparent 5px),
+                    radial-gradient(circle at 38px 6px, #ffbd2e 5px, transparent 5px),
+                    radial-gradient(circle at 56px 6px, #27c93f 5px, transparent 5px);
+}
+body.light-mode .post-title::before {
+  color: #0969da;
+}
+
+body.light-mode .post-title,
+body.light-mode .post-title a,
+body.light-mode .page-title {
+  color: #24292f;
+}
+body.light-mode .post-date {
+  color: #57606a;
+}
+body.light-mode .related {
+  border-top-color: #d0d7de;
+}
+body.light-mode .related-posts li small {
+  color: #57606a;
+}
+body.light-mode .related-posts li a:hover {
+  color: #0550ae;
+}
+
+body.light-mode code {
+  color: #cf222e;
+  background-color: #f6f8fa;
+  border-color: #d0d7de;
+}
+body.light-mode pre {
+  background-color: #f6f8fa;
+  border-color: #d0d7de;
+}
+body.light-mode blockquote {
+  color: #57606a;
+  border-left-color: #0969da;
+}
+body.light-mode table {
+  border-color: #d0d7de;
+}
+body.light-mode td, body.light-mode th {
+  border-color: #d0d7de;
+}
+body.light-mode tbody tr:nth-child(odd) td,
+body.light-mode tbody tr:nth-child(odd) th {
+  background-color: #f6f8fa;
+}
+body.light-mode hr {
+  border-top-color: #d0d7de;
+  border-bottom-color: #fff;
+}
+body.light-mode .message {
+  color: #24292f;
+  background-color: #f6f8fa;
+  border-color: #d0d7de;
+}
+body.light-mode .pagination {
+  color: #57606a;
+}
+body.light-mode .pagination-item {
+  border-color: #d0d7de;
+}
+body.light-mode a.pagination-item:hover {
+  background-color: #f6f8fa;
+}
+
+body.light-mode .content::after {
+  background: none;
 }

@@ -12,11 +12,13 @@
         {% endfor %}
         <br>
         <div style="font-size:80%;">
+          <a class="sidebar-nav-item" href="{{ "https://scholar.google.com/citations?user=ZO31OgwAAAAJ" }}" rel="noopener" target="_blank">Google Scholar</a>
           <a class="sidebar-nav-item" href="{{ "https://github.com/tford9" }}" rel="noopener" target="_blank">GitHub</a>
           <a class="sidebar-nav-item" href="{{ "https://www.threads.net/@professor_ford" }}" rel="noopener" target="_blank">Threads</a>
         </div>
       </nav>
 
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">[toggle theme]</button>
       <p>&copy; {{ site.time | dateFormat('YYYY') }} All rights reserved.</p>
     </div>
   </div>

@@ -16,6 +16,7 @@ pnpm-lock.yaml
 # Distribution or Generated output
 dist
 public
+_site
 
 # dotenv environment variables file
 .env*

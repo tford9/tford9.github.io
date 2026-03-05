@@ -45,6 +45,24 @@ html {
   }
 }
 
+/* Theme toggle */
+.theme-toggle {
+  background: none;
+  border: 1px solid rgba(255,255,255,.3);
+  color: rgba(255,255,255,.7);
+  cursor: pointer;
+  padding: .25rem .5rem;
+  border-radius: 4px;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: .75rem;
+  margin-top: .5rem;
+  transition: all .2s;
+}
+.theme-toggle:hover {
+  border-color: rgba(255,255,255,.6);
+  color: #fff;
+}
+
 
 /*
  * Sidebar
@@ -57,7 +75,8 @@ html {
   text-align: center;
   padding: 2rem 1rem;
   color: rgba(255,255,255,.5);
-  background-color: #202020;
+  background-color: #010409;
+  border-right: 1px solid #30363d;
 }
 @media (min-width: 48em) {
   .sidebar {
@@ -77,10 +96,22 @@ html {
 
 /* About section */
 .sidebar-about h1 {
-  color: #fff;
+  color: #3fb950;
   margin-top: 0;
-  font-family: "Roasting", serif;
-  font-size: 3.25rem;
+  font-family: "Courier New", Consolas, "Liberation Mono", monospace;
+  font-size: 1.8rem;
+  letter-spacing: -0.02em;
+}
+.sidebar-about h1 a {
+  color: #3fb950;
+}
+.sidebar-about h1::after {
+  content: "_";
+  animation: blink 1s step-end infinite;
+  color: #3fb950;
+}
+@keyframes blink {
+  50% { opacity: 0; }
 }
 
 /* Sidebar nav */
