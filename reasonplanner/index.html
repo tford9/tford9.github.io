@@ -2,8 +2,8 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
-  <title>Research | Trenton W. Ford</title>
-  <meta name="description" content="I direct the Ford AI and Society (FAIS) Lab at William & Mary, where our research focuses on the intersection of artificial intelligence, machine learning,">
+  <title>ReasonPlanner: Enhancing Autonomous Planning with Temporal Knowledge Graphs and LLMs | Trenton W. Ford</title>
+  <meta name="description" content="We released our preprint ReasonPlanner: Enhancing Autonomous Planning in Dynamic Environments with Temporal Knowledge Graphs and LLMs on arXiv.">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="shortcut icon" href="/favicon-32x32.png" sizes="32x32">
@@ -34,7 +34,7 @@
         <a class="sidebar-nav-item" href="/">Home</a>
         <a class="sidebar-nav-item" href="/contact/">Contact Information</a>
         <a class="sidebar-nav-item" href="/publications/">Publications</a>
-        <a class="sidebar-nav-item active" href="/research/">Research</a>
+        <a class="sidebar-nav-item" href="/research/">Research</a>
         <a class="sidebar-nav-item" href="/scholar/">Google Scholar</a>
         <br>
         <div style="font-size:80%;">
@@ -50,16 +50,30 @@
   </div>
 
   <div role="main" class="content container">
-    <article class="post" data-input-path="/pages/research">
-      <h1 class="post-title">Research</h1>
-<p>I direct the <strong>Ford AI and Society (FAIS) Lab</strong> at William &amp; Mary, where our research focuses on the intersection of artificial intelligence, machine learning, and society.</p>
-<h2>Current Research Areas</h2>
-<p><strong>Human-AI Teaming (HAT)</strong> – We study how humans and AI agents can effectively collaborate, developing systems like VirTLab for modeling and evaluating team dynamics through agent-based simulations.</p>
-<p><strong>Human-Digital Twins (HDTs)</strong> – Our Comp-HuSim platform explores persistent digital personality simulation, creating AI agents with rich backstories, personality traits, and the ability to engage in complex social interactions.</p>
-<p><strong>Agentic AI</strong> – We build autonomous planning agents like ReasonPlanner and DAVIS that leverage temporal knowledge graphs and LLMs for reflective thinking and interactive reasoning in dynamic environments.</p>
-<p><strong>Computational Disinformation</strong> – We research how misinformation spreads online and develop tools for detection and analysis, including our MEWS system for real-time social media manipulation detection.</p>
-<p><strong>Societal Impacts of AI</strong> – I write regularly for the Bulletin of the Atomic Scientists on topics including facial recognition in law enforcement, virtual reality ethics, and algorithmic classification’s role in societal polarization.</p>
+    <article class="post" data-input-path="/posts/2024/10-reasonplanner">
+      <h1 class="post-title">ReasonPlanner: Enhancing Autonomous Planning with Temporal Knowledge Graphs and LLMs</h1>
+      <time class="post-date" datetime="2024-10-12T12:00:00Z">October 12, 2024</time>
+<p>We released our preprint <strong>ReasonPlanner: Enhancing Autonomous Planning in Dynamic Environments with Temporal Knowledge Graphs and LLMs</strong> on arXiv.</p>
+<p>ReasonPlanner is a novel generalist agent designed for reflective thinking, planning, and interactive reasoning. It leverages LLMs to plan hypothetical trajectories by building a World Model based on a Temporal Knowledge Graph. The agent interacts with the environment using a natural language actor-critic module, where the actor translates the imagined trajectory into a sequence of actionable steps, and the critic determines if replanning is necessary.</p>
+<p>ReasonPlanner significantly outperforms previous state-of-the-art prompting-based methods on the ScienceWorld benchmark by more than 1.8x, while being more sample-efficient and interpretable. It relies solely on frozen weights, requiring no gradient updates, and can be deployed without specialized knowledge of machine learning.</p>
+<p>Co-authors: Minh Pham Dinh, Munira Syed, Michael G. Yankoski</p>
+<p><a href="https://arxiv.org/abs/2410.09252" target="_blank" rel="noopener">arXiv</a></p>
     </article>
+
+    <div class="related">
+      <h2>Related Posts</h2>
+      <ul class="related-posts">
+        <li><h3><a href="/division-begets-division/">Bulletin Article: Division Begets Division in the Age of Algorithmic Classification <small>December 10, 2025</small></a></h3></li>
+        <li><h3><a href="/nato-conference/">Featured Speaker at NATO Academic Conference on Digital Resilience <small>July 15, 2025</small></a></h3></li>
+        <li><h3><a href="/virtlab/">VirTLab: AI-Powered System for Human-AI Team Simulations <small>June 15, 2025</small></a></h3></li>
+        <li><h3><a href="/davis/">DAVIS: Planning Agent with Knowledge Graph-Powered Inner Monologue at EMNLP 2025 <small>January 15, 2025</small></a></h3></li>
+        <li><h3><a href="/comp-husim/">Comp-HuSim: Persistent Digital Personality Simulation Platform <small>June 28, 2024</small></a></h3></li>
+        <li><h3><a href="/march/">Virtual Reality has arrived, but are humans ready for it? <small>March 6, 2023</small></a></h3></li>
+        <li><h3><a href="/january/">pyIFD: Python-based Image Forgery Detection Toolkit <small>January 26, 2022</small></a></h3></li>
+        <li><h3><a href="/december/">WikiFaces Version 1.0.6 Released <small>December 16, 2021</small></a></h3></li>
+        <li><h3><a href="/november/">Bulletin Article: It’s time to address facial recognition, the most troubling law enforcement AI tool <small>November 11, 2021</small></a></h3></li>
+      </ul>
+    </div>
   </div>
 
   <script>
