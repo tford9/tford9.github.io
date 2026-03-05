@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   title: "Trenton W. Ford",
   tagline: "Research Blog & Stuff",
   url: "http://trentonford.com",
