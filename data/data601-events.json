@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Lecture: Introduction & Syllabus",
+    "start": "2025-08-25T11:00:00-04:00",
+    "end": "2025-08-25T12:15:00-04:00",
+    "location": "ISC 123",
+    "description": "Course overview, expectations, and introduction to tools."
+  },
+  {
+    "title": "Lab: Python Setup & Git",
+    "start": "2025-08-27T11:00:00-04:00",
+    "end": "2025-08-27T12:15:00-04:00",
+    "location": "Lab A",
+    "description": "Environment setup, Git workflows, and first exercises."
+  },
+  {
+    "title": "Office Hours",
+    "start": "2025-08-29T14:00:00-04:00",
+    "end": "2025-08-29T15:00:00-04:00",
+    "location": "Office 4xx",
+    "description": "Drop-in Q&A."
+  },
+  {
+    "title": "Test Event: Tomorrow",
+    "start": "2025-08-14T11:00:00-04:00",
+    "end": "2025-08-14T12:00:00-04:00",
+    "location": "TBD",
+    "description": "Temporary test event to verify calendar rendering."
+  }
+]
