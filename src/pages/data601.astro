@@ -1,0 +1,143 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+const title = "DATA 601";
+const description = "Foundations of Data Science — course resources for DATA 601.";
+
+const quickLinks = [
+  { label: "Syllabus (PDF)", href: "/data/data601-syllabus.pdf", note: "TBD" },
+  { label: "Canvas (LMS)", href: "#", note: "TBD" },
+  { label: "Q&A (Ed / Piazza)", href: "#", note: "TBD" },
+  { label: "Course GitHub", href: "#", note: "TBD" },
+];
+
+const details: [string, string][] = [
+  ["Term", "Fall 2025"],
+  ["Credits", "3.0"],
+  ["Level", "Graduate"],
+  ["Department", "Data Science · School of Computing, Data Science & Physics"],
+  ["Meets", "Tue / Thu · 11:00 am – 12:20 pm"],
+  ["Location", "Integrated Science Center 1291"],
+  ["Dates", "Aug 27 – Dec 16, 2025"],
+  ["Instructor", "Trenton W. Ford"],
+];
+---
+<BaseLayout {title} {description}>
+  <a href="/teaching" class="arrow">← Teaching</a>
+
+  <div class="mt-6">
+    <p class="eyebrow eyebrow--accent">DATA 601 · Graduate</p>
+    <h1 class="display mt-3 text-4xl">Foundations of Data Science</h1>
+    <p class="mt-4 max-w-read text-muted">
+      Key information, resources, and the week ahead. A graduate introduction to the tools,
+      methods, and judgment for working with data responsibly.
+    </p>
+  </div>
+
+  {/* ---- This week ---- */}
+  <section class="mt-16">
+    <SectionHeader label="This week" title="At a glance" />
+    <p class="-mt-2 mb-4 text-sm text-muted">Class events for the next seven days.</p>
+    <div id="weekCalendar" class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-7"></div>
+  </section>
+
+  {/* ---- Quick links ---- */}
+  <section class="mt-16">
+    <SectionHeader label="Resources" title="Quick links" />
+    <ul class="grid gap-3 sm:grid-cols-2">
+      {quickLinks.map((l) => (
+        <li>
+          <a class="flex items-center justify-between rounded-lg border border-line p-4 transition-colors hover:border-accent hover:bg-accent-soft" href={l.href}>
+            <span class="link no-underline">{l.label}</span>
+            <span class="meta">{l.note}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {/* ---- Details ---- */}
+  <section class="mt-16">
+    <SectionHeader label="Logistics" title="Course details" />
+    <dl class="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+      {details.map(([k, v]) => (
+        <div class="border-t border-line pt-3">
+          <dt class="eyebrow">{k}</dt>
+          <dd class="mt-1 text-ink">{v}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <script type="module">
+    const container = document.getElementById("weekCalendar");
+    const DAY_MS = 24 * 60 * 60 * 1000;
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const day = today.getDay();
+    const mondayOffset = (day + 6) % 7;
+    const start = new Date(today.getTime() - mondayOffset * DAY_MS);
+    const end = new Date(start.getTime() + 7 * DAY_MS);
+
+    const dayFormatter = new Intl.DateTimeFormat(undefined, { weekday: "short" });
+    const dateFormatter = new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric" });
+    const timeFormatter = new Intl.DateTimeFormat(undefined, { hour: "numeric", minute: "2-digit" });
+
+    function inRange(d) { return d >= start && d < end; }
+
+    function render(days, eventsByDay) {
+      container.innerHTML = "";
+      days.forEach((d) => {
+        const key = d.toISOString().slice(0, 10);
+        const events = (eventsByDay.get(key) || []).sort((a, b) => a.start - b.start);
+        const past = d < today;
+        const card = document.createElement("div");
+        card.className = "rounded-lg border border-line p-3" + (past ? " opacity-50" : "");
+        const header = document.createElement("div");
+        header.className = "mb-2";
+        header.innerHTML = `<div class="eyebrow">${dayFormatter.format(d)}</div>
+                            <div class="display text-base mt-0.5">${dateFormatter.format(d)}</div>`;
+        card.appendChild(header);
+        if (events.length === 0) {
+          const empty = document.createElement("div");
+          empty.className = "meta";
+          empty.textContent = "—";
+          card.appendChild(empty);
+        } else {
+          const list = document.createElement("ul");
+          list.className = "space-y-2";
+          events.forEach((ev) => {
+            const li = document.createElement("li");
+            li.innerHTML = `<div class="text-sm font-medium">${ev.title}</div>
+                            <div class="meta mt-0.5">${timeFormatter.format(ev.start)}–${timeFormatter.format(ev.end)}${ev.location ? ` · ${ev.location}` : ""}</div>`;
+            list.appendChild(li);
+          });
+          card.appendChild(list);
+        }
+        container.appendChild(card);
+      });
+    }
+
+    async function load() {
+      try {
+        const res = await fetch("/data/data601-events.json", { cache: "no-cache" });
+        const raw = await res.json();
+        const events = raw
+          .map((e) => ({ ...e, start: new Date(e.start), end: new Date(e.end) }))
+          .filter((e) => inRange(e.start) || inRange(e.end));
+        const days = Array.from({ length: 7 }, (_, i) => new Date(start.getTime() + i * DAY_MS));
+        const byDay = new Map();
+        days.forEach((d) => byDay.set(d.toISOString().slice(0, 10), []));
+        events.forEach((e) => {
+          const k = e.start.toISOString().slice(0, 10);
+          if (byDay.has(k)) byDay.get(k).push(e);
+        });
+        render(days, byDay);
+      } catch (err) {
+        container.innerHTML = '<div class="text-muted">Unable to load events.</div>';
+        console.error("Calendar load error", err);
+      }
+    }
+    load();
+  </script>
+</BaseLayout>

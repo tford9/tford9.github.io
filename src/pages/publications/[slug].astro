@@ -1,0 +1,36 @@
+---
+import { getPublications } from "@/lib/bib";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const pubs = await getPublications();
+  return pubs.map((p) => ({ params: { slug: p.slug }, props: { pub: p } }));
+}
+
+const { pub } = Astro.props;
+---
+<BaseLayout title={pub.title}>
+  <a href="/publications" class="arrow">← Publications</a>
+
+  <article class="mt-6">
+    <p class="eyebrow eyebrow--accent">{pub.venue ?? "Publication"}{pub.year ? ` · ${pub.year}` : ""}</p>
+    <h1 class="display mt-3 text-3xl sm:text-4xl max-w-read">{pub.title}</h1>
+    {pub.authors?.length > 0 && (
+      <p class="mt-4 text-muted max-w-read">{pub.authors.join(", ")}</p>
+    )}
+
+    {(pub.doi || pub.url) && (
+      <div class="mt-6 flex flex-wrap gap-3">
+        {pub.doi && <a class="btn" href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener noreferrer">DOI <span aria-hidden="true">↗</span></a>}
+        {pub.url && <a class="btn" href={pub.url} target="_blank" rel="noopener noreferrer">Publisher <span aria-hidden="true">↗</span></a>}
+      </div>
+    )}
+
+    {pub.abstract && (
+      <div class="mt-10 max-w-read">
+        <h2 class="eyebrow mb-3">Abstract</h2>
+        <p class="leading-relaxed text-ink">{pub.abstract}</p>
+      </div>
+    )}
+  </article>
+</BaseLayout>

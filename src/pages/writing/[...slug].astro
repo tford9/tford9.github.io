@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("posts");
+  // Only entries WITHOUT an external link get a local page.
+  return entries
+    .filter((p) => !p.data.link)
+    .map((p) => ({ params: { slug: p.slug }, props: { entry: p } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { title, pubDate, kind, tags } = entry.data;
+---
+<BaseLayout title={title} description={entry.data.description}>
+  <a href="/writing" class="arrow">← Writing</a>
+
+  <article class="mt-6">
+    <p class="eyebrow eyebrow--accent">
+      {kind === "article" ? "Article" : "Note"} ·
+      {new Date(pubDate).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })}
+    </p>
+    <h1 class="display mt-3 text-3xl sm:text-4xl max-w-read">{title}</h1>
+    {tags && tags.length > 0 && (
+      <div class="mt-4 flex flex-wrap gap-2">
+        {tags.map((tag) => <span class="chip">{tag}</span>)}
+      </div>
+    )}
+    <hr class="rule mt-8" />
+    <div class="prose mt-8">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

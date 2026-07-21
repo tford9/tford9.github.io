@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import { coursesByStatus, statusOrder, statusLabel } from "@/data/courses";
+
+const groups = statusOrder
+  .map((status) => ({ status, label: statusLabel[status], items: coursesByStatus(status) }))
+  .filter((g) => g.items.length > 0);
+---
+<BaseLayout title="Teaching">
+  <SectionHeader as="h1" label="Teaching" title="Courses" />
+  <p class="max-w-read text-muted">
+    Course pages and syllabi. Each links to its own site — some hosted here,
+    some on the course's own platform.
+  </p>
+
+  <div class="mt-12 space-y-14">
+    {groups.map((g) => (
+      <section>
+        <h2 class="eyebrow mb-4">{g.label}</h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {g.items.map((c) => {
+            const linked = Boolean(c.href);
+            const Tag = linked ? "a" : "div";
+            return (
+              <Tag
+                href={c.href}
+                target={c.external ? "_blank" : undefined}
+                rel={c.external ? "noopener noreferrer" : undefined}
+                class={`group flex flex-col rounded-lg border border-line p-5 ${linked ? "transition-colors hover:border-accent hover:bg-accent-soft" : ""}`}
+              >
+                <div class="flex items-center justify-between gap-3">
+                  <span class="eyebrow eyebrow--accent">{c.code}</span>
+                  <span class="meta">{c.term}</span>
+                </div>
+                <h3 class="display mt-2 text-lg group-hover:text-accent">
+                  {c.title}
+                  {c.external && <span aria-hidden="true" class="text-accent"> ↗</span>}
+                </h3>
+                <p class="mt-2 flex-1 text-sm leading-relaxed text-muted">{c.description}</p>
+                <div class="mt-4 flex items-center gap-3 text-sm">
+                  {c.level && <span class="meta">{c.level}</span>}
+                  {linked && (
+                    <span class="arrow ml-auto">
+                      {c.external ? "Course website" : "Course page"} <span aria-hidden="true">→</span>
+                    </span>
+                  )}
+                </div>
+              </Tag>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+
+    {groups.length === 0 && (
+      <p class="text-muted">No courses listed yet.</p>
+    )}
+  </div>
+</BaseLayout>

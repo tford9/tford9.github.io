@@ -1,0 +1,23 @@
+---
+// Reusable section header: mono eyebrow + serif title + optional "view all" link,
+// closed by a hairline rule. This is the site's signature index device.
+interface Props {
+  label: string;
+  title?: string;
+  href?: string;
+  cta?: string;
+  as?: "h1" | "h2";
+}
+const { label, title, href, cta = "View all", as = "h2" } = Astro.props;
+const Heading = as;
+---
+<div class="mb-6">
+  <div class="flex items-end justify-between gap-4">
+    <span class="eyebrow eyebrow--accent">{label}</span>
+    {href && (
+      <a href={href} class="arrow">{cta} <span aria-hidden="true">→</span></a>
+    )}
+  </div>
+  {title && <Heading class="display text-2xl sm:text-3xl mt-2">{title}</Heading>}
+  <hr class="rule mt-4" />
+</div>

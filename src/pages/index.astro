@@ -1,0 +1,151 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import { getPublications } from "@/lib/bib";
+import { getCollection } from "astro:content";
+import { sortedTalks, formatTalkDate } from "@/data/talks";
+import { courses } from "@/data/courses";
+
+const pubs = await getPublications();
+const selectedPubs = pubs.slice(0, 4);
+
+const talks = sortedTalks().slice(0, 3);
+
+const writing = (await getCollection("posts"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+  .slice(0, 3);
+
+const teaching = courses.filter((c) => c.status === "active" || c.status === "upcoming");
+
+// Research focus — edit to taste.
+const focus = [
+  { k: "01", t: "Computational disinformation", d: "Detecting and measuring coordinated influence and its harms." },
+  { k: "02", t: "Network science", d: "How structure shapes the spread of information and behavior." },
+  { k: "03", t: "Human–digital twins", d: "Modeling people to strengthen human–AI teaming." },
+  { k: "04", t: "LLM evaluation", d: "Assessing large language models beyond the benchmark." },
+];
+---
+<BaseLayout>
+  {/* ---- Hero ---- */}
+  <section class="grid gap-10 sm:grid-cols-[1fr_auto] sm:items-start">
+    <div class="max-w-read">
+      <p class="eyebrow eyebrow--accent">William &amp; Mary · FAIS Lab</p>
+      <h1 class="display mt-4 text-4xl sm:text-5xl">Trenton W. Ford</h1>
+      <p class="mt-5 text-lg leading-snug text-ink">
+        Assistant Professor of Data Science. I study how AI reshapes society —
+        and advise the teams building it.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted">
+        I direct the Ford AI &amp; Society (FAIS) Lab at William &amp; Mary, working on
+        computational disinformation, network science, and human–digital twins. I lead
+        two DARPA initiatives on human–AI teaming and large-language-model evaluation,
+        and I advise organizations putting AI to work responsibly.
+      </p>
+      <div class="mt-7 flex flex-wrap gap-3">
+        <a class="btn btn--solid" href="/about">About &amp; advising</a>
+        <a class="btn" href="/publications">Publications</a>
+        <a class="btn" href="https://fais.wm.edu/" target="_blank" rel="noopener noreferrer">
+          FAIS Lab <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+    <figure class="order-first sm:order-none">
+      <img
+        src="/images/trenton-ford.jpg"
+        alt="Trenton W. Ford"
+        width="176"
+        height="176"
+        class="h-40 w-40 rounded-lg object-cover shadow-sm ring-1 ring-line sm:h-44 sm:w-44"
+      />
+    </figure>
+  </section>
+
+  {/* ---- Research focus ---- */}
+  <section class="mt-20">
+    <SectionHeader label="Focus" title="Research areas" />
+    <dl class="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+      {focus.map((f) => (
+        <div class="flex gap-4">
+          <span class="meta pt-1 text-accent">{f.k}</span>
+          <div>
+            <dt class="display text-lg">{f.t}</dt>
+            <dd class="mt-1 text-sm leading-relaxed text-muted">{f.d}</dd>
+          </div>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  {/* ---- Selected publications ---- */}
+  {selectedPubs.length > 0 && (
+    <section class="mt-20">
+      <SectionHeader label="Research" title="Selected publications" href="/publications" />
+      <div>
+        {selectedPubs.map((p) => (
+          <a class="entry group" href={`/publications/${p.slug}/`}>
+            <div class="flex items-baseline justify-between gap-4">
+              <span class="meta">{p.year ?? "—"}</span>
+            </div>
+            <h3 class="entry__title mt-1">{p.title}</h3>
+            {p.authors?.length > 0 && (
+              <p class="mt-1 text-sm text-muted">{p.authors.slice(0, 6).join(", ")}{p.authors.length > 6 ? ", et al." : ""}</p>
+            )}
+            {p.venue && <p class="meta mt-1">{p.venue}</p>}
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {/* ---- Talks + Writing, side by side ---- */}
+  <section class="mt-20 grid gap-12 sm:grid-cols-2">
+    <div>
+      <SectionHeader label="Speaking" title="Recent talks" href="/talks" />
+      {talks.map((t) => (
+        <div class="entry">
+          <span class="meta">{formatTalkDate(t.date)}</span>
+          <h3 class="entry__title mt-1 !text-base">{t.title}</h3>
+          <p class="meta mt-1">{t.event}</p>
+        </div>
+      ))}
+    </div>
+    <div>
+      <SectionHeader label="Writing" title="Latest" href="/writing" />
+      {writing.map((w) => {
+        const href = w.data.link ?? `/writing/${w.slug}/`;
+        const ext = Boolean(w.data.link);
+        return (
+          <a class="entry" href={href} target={ext ? "_blank" : undefined} rel={ext ? "noopener noreferrer" : undefined}>
+            <span class="meta">{new Date(w.data.pubDate).toLocaleDateString(undefined, { year: "numeric", month: "short" })}{ext ? " · external" : ""}</span>
+            <h3 class="entry__title mt-1 !text-base">{w.data.title}</h3>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  {/* ---- Teaching ---- */}
+  {teaching.length > 0 && (
+    <section class="mt-20">
+      <SectionHeader label="Teaching" title="Courses" href="/teaching" />
+      <div class="grid gap-4 sm:grid-cols-2">
+        {teaching.map((c) => (
+          <a
+            class="group rounded-lg border border-line p-5 transition-colors hover:border-accent hover:bg-accent-soft"
+            href={c.href ?? "/teaching"}
+            target={c.external ? "_blank" : undefined}
+            rel={c.external ? "noopener noreferrer" : undefined}
+          >
+            <div class="flex items-center justify-between">
+              <span class="eyebrow eyebrow--accent">{c.code}</span>
+              <span class="meta">{c.term}</span>
+            </div>
+            <h3 class="display mt-2 text-lg group-hover:text-accent">{c.title} {c.external && <span aria-hidden="true" class="text-accent">↗</span>}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{c.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</BaseLayout>

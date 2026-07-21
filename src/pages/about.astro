@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+
+const contacts = [
+  { label: "Email", value: "twford@wm.edu", href: "mailto:twford@wm.edu" },
+  { label: "FAIS Lab", value: "fais.wm.edu", href: "https://fais.wm.edu/", external: true },
+  { label: "Scholar", value: "Google Scholar", href: "https://scholar.google.com/", external: true },
+];
+---
+<BaseLayout title="About">
+  <SectionHeader as="h1" label="About" title="Trenton W. Ford" />
+
+  <div class="grid gap-12 sm:grid-cols-[1fr_16rem] sm:items-start">
+    <div class="prose">
+      <p>
+        I'm an Assistant Professor of Data Science at William &amp; Mary and Director of the
+        Ford AI &amp; Society (FAIS) Lab. My research examines computational disinformation,
+        network science, and the societal impacts of AI, with a growing focus on
+        human–digital twins and human–AI teaming.
+      </p>
+      <p>
+        I lead two DARPA initiatives advancing research in human–AI teaming (HAT),
+        human–digital twins (HDTs), and the evaluation of large language models. Alongside
+        my academic work, I'm active in science outreach and science communication —
+        translating research on AI and society for broader audiences.
+      </p>
+
+      <h2>Advising &amp; consulting</h2>
+      <p>
+        Beyond the university, I advise organizations building and deploying AI systems —
+        on evaluation, risk, and the social consequences of the technology. Engagements range
+        from short advisory sessions and workshops to longer research collaborations.
+        If that's useful to your team, <a href="mailto:twford@wm.edu">get in touch</a>.
+      </p>
+    </div>
+
+    <aside class="rounded-lg border border-line p-6">
+      <h2 class="eyebrow mb-4">Contact</h2>
+      <dl class="space-y-4">
+        {contacts.map((c) => (
+          <div>
+            <dt class="meta">{c.label}</dt>
+            <dd class="mt-0.5">
+              <a class="link" href={c.href} target={c.external ? "_blank" : undefined} rel={c.external ? "noopener noreferrer" : undefined}>
+                {c.value}{c.external ? " ↗" : ""}
+              </a>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </aside>
+  </div>
+</BaseLayout>
