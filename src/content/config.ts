@@ -15,17 +15,4 @@ const posts = defineCollection({
   }),
 });
 
-const publications = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    authors: z.array(z.string()),
-    venue: z.string().optional(),
-    year: z.number().optional(),
-    doi: z.string().optional(),
-    url: z.string().url().optional(),
-    abstract: z.string().optional(),
-  }),
-});
-
-export const collections = { posts, publications };
+export const collections = { posts };

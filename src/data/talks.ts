@@ -37,28 +37,6 @@ export const talks: Talk[] = [
     kind: "invited",
     href: "/talks/dog-street-ai/",
   },
-  // NOTE: entries below are samples — replace with real talks.
-  {
-    title: "Human–Digital Twins and the Future of Human–AI Teaming",
-    event: "DARPA Program Review",
-    date: "2025-05-14",
-    location: "Arlington, VA",
-    kind: "invited",
-  },
-  {
-    title: "Evaluating Large Language Models Beyond the Benchmark",
-    event: "William & Mary Data Science Seminar",
-    date: "2025-03-06",
-    location: "Williamsburg, VA",
-    kind: "seminar",
-  },
-  {
-    title: "Computational Disinformation: Detection, Networks, and Harm",
-    event: "Science Communication Panel",
-    date: "2024-11-12",
-    location: "Virtual",
-    kind: "panel",
-  },
 ];
 
 export const kindLabel: Record<TalkKind, string> = {
